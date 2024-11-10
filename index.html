@@ -32,10 +32,8 @@
 
         <!-- HUD -->
         <div id="hud" style="display: none">
-            <div id="pauseMenu" style="display: none">
-                <button id="resume" class="btn">Continuer</button>
-                <button id="exit" class="btn">Quitter</button>
-            </div>
+            <!-- Pause -->
+            <load src="src/html/menu/pause.htm" />
 
             <div id="buyMenu" class="hidden sideMenu">
                 <button id="closeBuyMenu" class="btn btnCloseMenu">
@@ -83,95 +81,16 @@
 
         <div id="ui">
             <!-- Menu -->
-            <div id="menu" class="screen">
-                <h1>PROTECT THE TURTLES !! Rebuilt</h1>
-                <div class="menu-btnContainer">
-                    <button class="btn navBtn menuBtn" data-to="levelSelection">
-                        Play
-                    </button>
-                    <button class="btn navBtn menuBtn" data-to="settings">
-                        Paramètres
-                    </button>
-                    <button class="btn navBtn menuBtn" data-to="credits">
-                        Credits
-                    </button>
-                </div>
-            </div>
+            <load src="src/html/menu/main.htm" />
 
             <!-- Level selection -->
-            <div id="levelSelection" class="screen" style="display: none">
-                <h1>Difficulty</h1>
-                <div class="levelSelection-btnContainer">
-                    <button class="btn levelBtn" id="btnLevel1" data-level="0">
-                        1
-                    </button>
-                    <button class="btn levelBtn" id="btnLevel2" data-level="1">
-                        2
-                    </button>
-                </div>
-                <button class="btn navBtn" id="btnMenu" data-to="menu">
-                    MENU
-                </button>
-            </div>
+            <load src="src/html/menu/level.htm" />
 
             <!-- Settings -->
-            <div id="settings" class="screen" style="display: none">
-                <h1>Paramètres</h1>
-                <div class="settingsContainer">
-                    <button class="btn settingsBtn" id="toggleMusic">
-                        Musique
-                        <i class="fa-solid fa-volume-up" id="music-on"></i>
-                        <i
-                            class="fa-solid fa-volume-mute"
-                            id="music-off"
-                            style="display: none"
-                        ></i>
-                    </button>
-                    <button class="btn settingsBtn" id="toggleSound">
-                        Bruitages
-                        <i class="fa-solid fa-volume-up" id="sound-on"></i>
-                        <i
-                            class="fa-solid fa-volume-mute"
-                            id="sound-off"
-                            style="display: none"
-                        ></i>
-                    </button>
-                </div>
-                <button class="btn navBtn" id="btnMenu" data-to="menu">
-                    MENU
-                </button>
-            </div>
+            <load src="src/html/menu/settings.htm" />
 
             <!-- Credits -->
-            <div id="credits" class="screen" style="display: none">
-                <h1>Credits</h1>
-                <div class="creditsContainer">
-                    <h1>Développement</h1>
-                    <h2>
-                        <a href="http://juliencaillaud.com/">Alice CAILLAUD</a>
-                    </h2>
-                    <h2>Quentin ROBARD</h2>
-                    <h1>Graphismes</h1>
-                    <h2>
-                        Arthur FERRER -
-                        <a href="https://www.instagram.com/koito_joestar/"
-                            ><i class="fa-brands fa-instagram"></i>
-                            koito_joestar
-                        </a>
-                    </h2>
-                    <h1>Musiques / Sons</h1>
-                    <h2>
-                        Philémon SOUL -
-                        <a href="https://soundcloud.com/hiromasterdub"
-                            ><i class="fa-brands fa-soundcloud"></i>
-                            hiromasterdub
-                        </a>
-                    </h2>
-                </div>
-                <button class="btn navBtn" id="btnMenu" data-to="menu">
-                    MENU
-                </button>
-            </div>
+            <load src="src/html/menu/credits.htm" />
         </div>
 
         <script type="module" src="./src/main.ts"></script>

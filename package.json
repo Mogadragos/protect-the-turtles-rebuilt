@@ -1,15 +1,16 @@
 {
-  "name": "protect-the-turtles-rebuilt",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "typescript": "~5.6.2",
-    "vite": "^5.4.10"
-  }
+    "name": "protect-the-turtles-rebuilt",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "typescript": "~5.6.2",
+        "vite": "^5.4.10",
+        "vite-plugin-html-inject": "^1.1.2"
+    }
 }
