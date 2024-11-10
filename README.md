@@ -1,6 +1,6 @@
-# Protect the turtles (rebuilt)
+# Protect the turtles !! Rebuilt
 
-This project is a rebuild of "Protect the turtles", a game jam project.
+This project is a rebuild of "Protect the turtles !!", a game jam project.
 
 Github: https://github.com/Mogadragos/protect-the-turtles-rebuilt
 
