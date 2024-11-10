@@ -4,7 +4,7 @@ This project is a rebuild of "Protect the turtles !!", a game jam project.
 
 Github: https://github.com/Mogadragos/protect-the-turtles-rebuilt
 
-Music: https://soundcloud.com/97-ls
+Music: https://soundcloud.com/hiromasterdub
 
 Graphics: https://www.instagram.com/koito_joestar/
 

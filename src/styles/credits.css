@@ -1,0 +1,29 @@
+#credits {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.creditsContainer h1 {
+  margin: 0;
+}
+#credits h1 {
+  margin-bottom: 0;
+}
+
+.creditsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.creditsContainer h2 {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.creditsContainer a {
+  color: black;
+}
