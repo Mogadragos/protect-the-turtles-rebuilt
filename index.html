@@ -15,7 +15,7 @@
 
     <body>
         <div id="game" style="display: none" class="screen">
-            <canvas id="background"></canvas>
+            <img id="background" src="" />
             <canvas id="roads"></canvas>
             <canvas id="spots"></canvas>
             <canvas id="enemies"></canvas>
@@ -33,26 +33,26 @@
         <!-- HUD -->
         <div id="hud" style="display: none">
             <!-- Pause -->
-            <load src="src/html/hud/pause.htm" />
+            <load src="src/_html/hud/pause.htm" />
             <!-- Buy -->
-            <load src="src/html/hud/buy.htm" />
+            <load src="src/_html/hud/buy.htm" />
             <!-- Upgrade -->
-            <load src="src/html/hud/upgrade.htm" />
+            <load src="src/_html/hud/upgrade.htm" />
         </div>
 
         <!-- MENU -->
         <div id="menu">
             <!-- Main -->
-            <load src="src/html/menu/main.htm" />
+            <load src="src/_html/menu/main.htm" />
 
             <!-- Level selection -->
-            <load src="src/html/menu/level.htm" />
+            <load src="src/_html/menu/level.htm" />
 
             <!-- Settings -->
-            <load src="src/html/menu/settings.htm" />
+            <load src="src/_html/menu/settings.htm" />
 
             <!-- Credits -->
-            <load src="src/html/menu/credits.htm" />
+            <load src="src/_html/menu/credits.htm" />
         </div>
 
         <script type="module" src="./src/main.ts"></script>
