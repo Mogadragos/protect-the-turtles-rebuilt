@@ -1,49 +1,49 @@
 html,
 body {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 body {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  margin: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
 body > * {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .btn {
-  background-color: #fefefe;
-  color: var(--primary);
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 3px;
-  border: var(--primary) 1px solid;
-  transition: 300ms;
+    background-color: #fefefe;
+    color: var(--primary);
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 3px;
+    border: var(--primary) 1px solid;
+    transition: 300ms;
 }
 .btn:hover {
-  transition: 300ms;
-  background-color: #ececec;
+    transition: 300ms;
+    background-color: #ececec;
 }
 #btnMenu {
-  padding: 10px;
-  margin-bottom: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 h1 {
-  color: var(--primary);
+    color: var(--primary);
 }
 
 * {
-  font-family: "BaksoSapi";
+    font-family: "BaksoSapi";
 }
 
 @font-face {
-  font-family: "BaksoSapi";
-  src: url("../assets/BaksoSapi.otf");
+    font-family: "BaksoSapi";
+    src: url("../assets/fonts/BaksoSapi.otf");
 }

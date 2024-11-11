@@ -6,3 +6,5 @@ import "./styles/credits.css";
 import "./styles/game.css";
 import "./styles/hud.css";
 import "./styles/variables.css";
+
+import "./assets/fonts/BaksoSapi.otf";
