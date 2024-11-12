@@ -1,6 +1,9 @@
 const width = 1920;
 const height = 1080;
 
+import background_1 from "../_assets/backgrounds/background-1.png";
+import background_2 from "../_assets/backgrounds/background-2.png";
+
 export type PathData = {
     x1: number;
     y1: number;
@@ -46,7 +49,7 @@ export const levelsJSON: LevelData[] = [
     {
         level: 1,
         startingGoldAmount: 50,
-        image: "background-1.png",
+        image: background_1,
         nbTurtles: 5,
         roads: [
             [
@@ -155,7 +158,7 @@ export const levelsJSON: LevelData[] = [
     {
         level: 2,
         startingGoldAmount: 100,
-        image: "background-2.png",
+        image: background_2,
         nbTurtles: 3,
         roads: [
             [

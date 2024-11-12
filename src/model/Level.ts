@@ -59,8 +59,8 @@ export class Level {
         this.reset();
 
         (document.getElementById("background") as HTMLImageElement).src =
-            "./assets/" + this.background;
-        // TODO FIXME
+            this.background;
+
         const ctxRoads = (
             document.getElementById("roads") as HTMLCanvasElement
         ).getContext("2d")!;
