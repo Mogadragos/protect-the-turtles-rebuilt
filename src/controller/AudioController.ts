@@ -1,4 +1,12 @@
 import { SoundData } from "../datas/sounds";
+import { PubSub } from "../utils/PubSub";
+import { AbstractController } from "./AbstractController";
+
+declare global {
+    interface Window {
+        webkitAudioContext: AudioContext;
+    }
+}
 
 type Track = SoundData & {
     buffer?: AudioBuffer;
@@ -8,7 +16,7 @@ interface Tracks {
     [key: string]: Track;
 }
 
-export class AudioController {
+export class AudioController extends AbstractController {
     musicOn: boolean;
     soundOn: boolean;
 
@@ -22,7 +30,9 @@ export class AudioController {
 
     musicSource?: AudioBufferSourceNode;
 
-    constructor() {
+    constructor(pubSub: PubSub) {
+        super(pubSub);
+
         this.musicOn =
             (localStorage.getItem("musicOn") as unknown as number) < 1;
         this.soundOn =
@@ -39,6 +49,13 @@ export class AudioController {
 
         this.toggleMusic();
         this.toggleSound();
+
+        this.pubSub.subscribe("catch_turtle", () => this.play("alarm"));
+        this.pubSub.subscribe("buy", () => this.play("buy_sell"));
+        this.pubSub.subscribe("click", () => this.play("click"));
+        this.pubSub.subscribe("refuse_action", () => this.play("error"));
+        this.pubSub.subscribe("screen_game", () => this.play("ambient"));
+        this.pubSub.subscribe("screen_menu", () => this.play("menu"));
     }
 
     async init(tracks: SoundData[], menuMusic: string) {
@@ -46,11 +63,11 @@ export class AudioController {
         const btnSoundToggle = document.getElementById("toggleSound")!;
 
         btnMusicToggle.onclick = () => {
-            window.audioController.play("click");
+            this.pubSub.publish("click");
             this.toggleMusic();
         };
         btnSoundToggle.onclick = () => {
-            window.audioController.play("click");
+            this.pubSub.publish("click");
             this.toggleSound();
         };
 

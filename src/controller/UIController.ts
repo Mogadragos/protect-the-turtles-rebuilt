@@ -2,15 +2,18 @@ import { TowerWithTarget } from "../model/TowerWithTarget.js";
 import { Campfire } from "../model/Campfire.js";
 import { GameController } from "./GameController.js";
 import { Spot } from "../model/Spot.js";
+import { Constants } from "../utils/Constants.js";
+import { AbstractController } from "./AbstractController.js";
+import { PubSub } from "../utils/PubSub.js";
 
-const width = 1920;
-const height = 1080;
-export class UIController {
+export class UIController extends AbstractController {
     gameController: GameController;
     menuOpened: boolean;
     currentSelectedSpot: Spot | null;
 
-    constructor(gameController: GameController) {
+    constructor(pubSub: PubSub, gameController: GameController) {
+        super(pubSub);
+
         this.menuOpened = true;
         this.gameController = gameController;
         this.currentSelectedSpot = null;
@@ -21,7 +24,7 @@ export class UIController {
 
         //#region HUD
         document.getElementById("resume")!.onclick = () => {
-            window.audioController.play("click");
+            this.pubSub.publish("click");
             document.getElementById("pause")!.style.display = "";
             document.getElementById("golds")!.style.display = "";
             document.getElementById("pauseMenu")!.style.display = "none";
@@ -30,7 +33,7 @@ export class UIController {
         };
 
         document.getElementById("exit")!.onclick = () => {
-            window.audioController.play("click");
+            this.pubSub.publish("click");
             document.getElementById("pause")!.style.display = "none";
             document.getElementById("golds")!.style.display = "none";
             document.getElementById("pauseMenu")!.style.display = "none";
@@ -40,7 +43,7 @@ export class UIController {
         };
 
         document.getElementById("pause")!.onclick = () => {
-            window.audioController.play("click");
+            this.pubSub.publish("click");
             document.getElementById("pause")!.style.display = "none";
             document.getElementById("golds")!.style.display = "none";
             document.getElementById("pauseMenu")!.style.display = "";
@@ -51,11 +54,11 @@ export class UIController {
 
         //#region hud menus
         document.getElementById("closeBuyMenu")!.onclick = () => {
-            window.audioController.play("click");
+            this.pubSub.publish("click");
             this.closeBuyMenu();
         };
         document.getElementById("closeUpgradeMenu")!.onclick = () => {
-            window.audioController.play("click");
+            this.pubSub.publish("click");
             this.closeUpgradeMenu();
         };
         //#endregion
@@ -66,7 +69,7 @@ export class UIController {
                 this.currentSelectedSpot &&
                 this.gameController.level.golds >= 50
             ) {
-                window.audioController.play("buy_sell");
+                this.pubSub.publish("buy");
                 this.gameController.level.golds -= 50;
                 this.updateGoldAmount();
                 const width = 80;
@@ -90,7 +93,7 @@ export class UIController {
                 this.gameController.addTower(newTower);
                 this.closeBuyMenu();
             } else {
-                window.audioController.play("error");
+                this.pubSub.publish("refuse_action");
             }
         };
 
@@ -99,7 +102,7 @@ export class UIController {
                 this.currentSelectedSpot &&
                 this.gameController.level.golds >= 100
             ) {
-                window.audioController.play("buy_sell");
+                this.pubSub.publish("buy");
                 this.gameController.level.golds -= 100;
                 this.updateGoldAmount();
                 let newTower = new Campfire(
@@ -113,7 +116,7 @@ export class UIController {
                 this.gameController.addTower(newTower);
                 this.closeBuyMenu();
             } else {
-                window.audioController.play("error");
+                this.pubSub.publish("refuse_action");
             }
         };
 
@@ -122,7 +125,7 @@ export class UIController {
                 this.currentSelectedSpot &&
                 this.gameController.level.golds >= 200
             ) {
-                window.audioController.play("buy_sell");
+                this.pubSub.publish("buy");
                 this.gameController.level.golds -= 200;
                 this.updateGoldAmount();
                 const width = 80;
@@ -146,7 +149,7 @@ export class UIController {
                 this.gameController.addTower(newTower);
                 this.closeBuyMenu();
             } else {
-                window.audioController.play("error");
+                this.pubSub.publish("refuse_action");
             }
         };
 
@@ -164,7 +167,7 @@ export class UIController {
                 //remove the reference of the spot
                 this.currentSelectedSpot!.tower = null;
                 //play sound
-                window.audioController.play("buy_sell");
+                this.pubSub.publish("buy");
                 //close menu
                 this.closeUpgradeMenu();
 
@@ -187,8 +190,8 @@ export class UIController {
 
                 let distance = distanceBetween(
                     {
-                        x: (x / canvasWidth) * width,
-                        y: (y / canvasHeight) * height,
+                        x: (x / canvasWidth) * Constants.width,
+                        y: (y / canvasHeight) * Constants.height,
                     },
                     {
                         x: spot.x,
@@ -197,7 +200,7 @@ export class UIController {
                 );
 
                 if (distance < spot.radius) {
-                    window.audioController.play("click");
+                    this.pubSub.publish("click");
                     this.currentSelectedSpot = spot;
                     document.getElementById("hud")!.style.display = "";
 
@@ -223,7 +226,7 @@ export class UIController {
             "navBtn"
         ) as HTMLCollectionOf<HTMLButtonElement>) {
             btn.onclick = (e) => {
-                window.audioController.play("click");
+                this.pubSub.publish("click");
                 this.navigate((e.target as HTMLElement).dataset.to!);
             };
         }
@@ -232,7 +235,7 @@ export class UIController {
             "levelBtn"
         ) as HTMLCollectionOf<HTMLButtonElement>) {
             btn.onclick = (e) => {
-                window.audioController.play("click");
+                this.pubSub.publish("click");
                 document.getElementById("game")!.style.display = "";
                 document.getElementById("pause")!.style.display = "";
                 document.getElementById("golds")!.style.display = "";
@@ -260,7 +263,7 @@ export class UIController {
     startLevel(index: number) {
         this.gameController.setLevel(index);
         this.resume();
-        window.audioController.play("ambient");
+        this.pubSub.publish("screen_game");
     }
 
     pause() {
@@ -274,7 +277,7 @@ export class UIController {
     quit() {
         this.pause();
         this.navigate("main");
-        window.audioController.play("menu");
+        this.pubSub.publish("screen_menu");
     }
 
     closeBuyMenu() {

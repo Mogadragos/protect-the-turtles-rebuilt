@@ -1,9 +1,13 @@
 import { AnimationData } from "../datas/animations";
+import { PubSub } from "../utils/PubSub";
+import { AbstractController } from "./AbstractController";
 
-export class ImageController {
+export class ImageController extends AbstractController {
     animations: { [key: string]: ImageBitmap[] };
 
-    constructor() {
+    constructor(pubSub: PubSub) {
+        super(pubSub);
+
         this.animations = {};
     }
 

@@ -1,8 +1,9 @@
-const width = 1920;
-const height = 1080;
-
 import background_1 from "../_assets/backgrounds/background-1.png";
 import background_2 from "../_assets/backgrounds/background-2.png";
+import { Constants } from "../utils/Constants";
+
+const width = Constants.width;
+const height = Constants.height;
 
 export type PathData = {
     x1: number;

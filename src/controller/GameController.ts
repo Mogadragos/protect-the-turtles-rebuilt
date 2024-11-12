@@ -2,12 +2,14 @@ import { Enemy } from "../model/Enemy.js";
 import { Level } from "../model/Level.js";
 import { Tower } from "../model/Tower.js";
 import { Turtle } from "../model/Turtle.js";
+import { PubSub } from "../utils/PubSub.js";
+import { AbstractController } from "./AbstractController.js";
 
 interface Canvases {
     [key: string]: HTMLCanvasElement;
 }
 
-export class GameController {
+export class GameController extends AbstractController {
     // FPS
     then: DOMHighResTimeStamp;
     interval: number;
@@ -33,7 +35,9 @@ export class GameController {
 
     goldAmoundDOM: HTMLParagraphElement;
 
-    constructor(levels: Level[], canvases: Canvases) {
+    constructor(pubSub: PubSub, levels: Level[], canvases: Canvases) {
+        super(pubSub);
+
         // FPS
         const fps = 60;
         this.then = 0;
@@ -143,7 +147,7 @@ export class GameController {
             enemy.update(dt);
             if (enemy.tryGetTurtle) {
                 if (this.indexBaseTurtle < this.turtles.length) {
-                    window.audioController.play("alarm");
+                    this.pubSub.publish("catch_turtle");
                     enemy.setTurtle(this.turtles[this.indexBaseTurtle++]);
                 }
                 enemy.tryGetTurtle = false;

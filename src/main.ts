@@ -20,12 +20,12 @@ import { Wave } from "./model/Wave.ts";
 import { levelsJSON } from "./datas/levels.ts";
 import { animationsJSON } from "./datas/animations.ts";
 import { soundsJSON } from "./datas/sounds.ts";
+import { Constants } from "./utils/Constants.ts";
+import { PubSub } from "./utils/PubSub.ts";
 
 declare global {
     interface Window {
-        audioController: AudioController;
         imageController: ImageController;
-        webkitAudioContext: AudioContext;
     }
 }
 
@@ -33,14 +33,11 @@ interface Canvases {
     [key: string]: HTMLCanvasElement;
 }
 
-const width = 1920;
-const height = 1080;
-
 function resizeCanvases(canvases: Canvases) {
     for (const id in canvases) {
         const canvas = canvases[id];
-        canvas.width = width;
-        canvas.height = height;
+        canvas.width = Constants.width;
+        canvas.height = Constants.height;
     }
 }
 
@@ -89,14 +86,15 @@ function getCanvases(): Canvases {
     return { roads, spots, enemies, towers };
 }
 
-window.audioController = new AudioController();
+const pubSub = new PubSub();
 
-window.imageController = new ImageController();
+const audioController = new AudioController(pubSub);
+
+window.imageController = new ImageController(pubSub);
 
 async function init() {
     const promises = [];
-    promises.push(window.audioController.init(soundsJSON, "menu"));
-
+    promises.push(audioController.init(soundsJSON, "menu"));
     promises.push(window.imageController.init(animationsJSON));
 
     await Promise.all(promises);
@@ -108,9 +106,9 @@ window.onload = () => {
 
     const levels = loadLevels(canvases);
 
-    const gameController = new GameController(levels, canvases);
+    const gameController = new GameController(pubSub, levels, canvases);
 
-    const uiController = new UIController(gameController);
+    const uiController = new UIController(pubSub, gameController);
 
     uiController.init();
     init();
