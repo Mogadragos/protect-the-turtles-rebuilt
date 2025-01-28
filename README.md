@@ -12,7 +12,7 @@ Graphics: https://www.instagram.com/koito_joestar/
 
 Prototype created for the Eco Game Jam 2022, using plain JavaScript, without any framework or bundler.
 
-https://projects.alicecaillaud.fr/turtles/
+https://mogador.itch.io/protect-the-turtles
 
 Github: https://github.com/Mogadragos/eco-game-jam
 
